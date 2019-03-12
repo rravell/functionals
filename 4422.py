@@ -7,7 +7,7 @@ def GetBellFunctionals(Matrix, InputsAlice, InputsBob, OutputsAlice, OutputsBob)
         for j in range (0, InputsBob):
             for k in range (0, OutputsAlice):
                 for l in range (0, OutputsBob):
-                    functional[s]=Matrix[2*i+k][2*j+l]
+                    functional[s]=-Matrix[2*i+k][2*j+l]
                     s=s+1             
     return(functional)
 
@@ -25,7 +25,8 @@ for key in mat.keys():
     if s>=3: #TO GET RID OF HEADERS
         Matrix= np.array(mat.get(key))
         BellFunctional=GetBellFunctionals(Matrix,InputsAlice,InputsBob,OutputsAlice,OutputsBob)
-        BellMatrix[i][:]=BellFunctional
+        BellMatrix[i][1:]=BellFunctional
+        BellMatrix[i][0]=-1
         i=i+1
     s=s+1
 
