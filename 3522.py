@@ -20,7 +20,7 @@ InputsBob = 5
 OutputsAlice=2
 OutputsBob=2
 NumberOfInequalities=7
-BellMatrix=np.zeros((NumberOfInequalities, InputsAlice*OutputsAlice*InputsBob*OutputsBob))
+BellMatrix=np.zeros((NumberOfInequalities, InputsAlice*OutputsAlice*InputsBob*OutputsBob+1))
 for key in mat.keys():
     if s>=3:
         Matrix= np.array(mat.get(key))
