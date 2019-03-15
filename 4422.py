@@ -65,7 +65,7 @@ for j in range(0, NumberOfInequalities):
             NormalisedFunctional=InefficiencyResistantInequalities[j][1:]/max
         else:
             NormalisedFunctional=InefficiencyResistantInequalities[j][1:]
-        np.savetxt(text, np.transpose(NormalisedFunctional[:]), fmt='%.2f')
+        np.savetxt(text, NormalisedFunctional, fmt='%.2f')
 text.close()
 
 
