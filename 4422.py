@@ -52,16 +52,21 @@ NormalisedFunctional=np.zeros((NumberOfInequalities, InputsAlice*(OutputsAlice+1
 text=open("IneffFunctionals4433.txt", 'w')
 for j in range(0, NumberOfInequalities):
     inequality=BellMatrix[j][:]
-    InefficiencyResistantInequalities[j][:]=extendInequalityToDetecLoopholeSetting(inequality,InputsAlice,OutputsAlice,parties)
-    vertices4433=BellPolytope(InputsAlice,OutputsAlice+1).getVertices()
-    distributions=np.matrix(vertices4433)
-    values=np.dot(distributions,np.transpose(InefficiencyResistantInequalities[j][1:]))
-    c=np.amax(values)
-    if c!=0:
-        NormalisedFunctional[j][:]=InefficiencyResistantInequalities[j][1:]/c
-    else:
-        NormalisedFunctional[j][:]=InefficiencyResistantInequalities[j][1:]
-np.savetxt(text, NormalisedFunctional, fmt='%.2f')
+    vertices4422=np.matrix(poly.getVertices())
+    values4422=np.dot(vertices4422,np.transpose(inequality[j][1:]))
+    d=np.amin(values4422)
+    if d<=-1: #JUST THE INEQUALITIES WE WANT
+        InefficiencyResistantInequalities[j][:]=extendInequalityToDetecLoopholeSetting(inequality,InputsAlice,OutputsAlice,parties)
+        vertices4433=BellPolytope(InputsAlice,OutputsAlice+1).getVertices()
+        distributions=np.matrix(vertices4433)
+        values4433=np.dot(distributions,np.transpose(InefficiencyResistantInequalities[j][1:]))
+        c=np.amax(values4433)
+        if c!=0:
+            NormalisedFunctional[j][:]=InefficiencyResistantInequalities[j][1:]/c
+        else:
+            NormalisedFunctional[j][:]=InefficiencyResistantInequalities[j][1:]
+
+            np.savetxt(text, NormalisedFunctional, fmt='%.2f')
 text.close()
 
     
