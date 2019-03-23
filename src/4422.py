@@ -71,7 +71,7 @@ for j in range(0, NumberOfInequalities):
         text.write(lispsyntax + '\n')
 text.close()
 
-
+    
     
     
     
