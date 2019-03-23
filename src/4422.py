@@ -1,6 +1,7 @@
 import scipy.io
 import numpy as np
 from bellpolytope import BellPolytope
+from syntaxlisp import LispHelper
 
 def GetBellFunctionals(Matrix, InputsAlice, InputsBob, OutputsAlice, OutputsBob):
     functional = np.zeros(InputsAlice*OutputsAlice*InputsBob*OutputsBob)
@@ -48,24 +49,26 @@ for key in mat.keys():
 
 poly=BellPolytope(InputsAlice,OutputsAlice)
 InefficiencyResistantInequalities=np.zeros((NumberOfInequalities, InputsAlice*(OutputsAlice+1)*InputsBob*(OutputsBob+1)+1))
-text=open("IneffFunctionals4433.txt",'w')
+text=open("IneffFunctionals4433Lisp.txt",'w')
+lisp=LispHelper
 for j in range(0, NumberOfInequalities):
     NormalisedFunctional=np.zeros(InputsAlice*(OutputsAlice+1)*InputsBob*(OutputsBob+1))    
     inequality=BellMatrix[j][:]
     vertices4422=np.matrix(poly.getVertices())
     values4422=np.dot(vertices4422,np.transpose(inequality[1:]))
-    min=np.amin(values4422)
-    if min<-1: #JUST THE INEQUALITIES WE WANT
+    minimum=np.amin(values4422)
+    if minimum<-1: #JUST THE INEQUALITIES WE WANT
         InefficiencyResistantInequalities[j][:]=extendInequalityToDetecLoopholeSetting(inequality,InputsAlice,OutputsAlice,parties)
         vertices4433=BellPolytope(InputsAlice,OutputsAlice+1).getVertices()
         distributions=np.matrix(vertices4433)
         values4433=np.dot(distributions,np.transpose(InefficiencyResistantInequalities[j][1:])) 
-        max=np.amax(values4433)
-        if max!=0:
-            NormalisedFunctional=InefficiencyResistantInequalities[j][1:]/max
+        maximum=np.amax(values4433)
+        if maximum!=0:
+            NormalisedFunctional=InefficiencyResistantInequalities[j][1:]/maximum
         else:
             NormalisedFunctional=InefficiencyResistantInequalities[j][1:]
-        np.savetxt(text, NormalisedFunctional, fmt='%.2f')
+        lispsyntax=lisp.syntaxlisp(lisp, NormalisedFunctional, 4, 3)
+        text.write(lispsyntax + '\n')
 text.close()
 
 
