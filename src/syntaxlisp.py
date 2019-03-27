@@ -26,9 +26,15 @@ class LispHelper:
     
     def syntaxlisp(self,functional, N, K):
         j = 0
-        lispCommand = self.genEquation(self, functional, j, N, K) 
+        if functional[j]>=0:
+            lispCommand = self.genEquation(self, functional, j, N, K)
+        else:
+            lispCommand = " - " + self.genEquation(self, functional, j, N, K)
         for j in range(1, np.size(functional)):
-            lispCommand += " - " + self.genEquation(self, functional, j, N, K)
+            if functional[j]>=0:
+                lispCommand += " + " + self.genEquation(self, functional, j, N, K)
+            else:
+                lispCommand += " - " + self.genEquation(self, functional, j, N, K)
         return lispCommand
                 
                 
