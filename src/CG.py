@@ -22,12 +22,12 @@ for i in range(0,size[0]):
             newfunctionals[i][PositionNumber+1]=functionals[i][j]
         
         else:                
-            newfunctionals[i][PositionNumber+2]=functionals[i][j]
-            newfunctionals[i][PositionNumber+3]=functionals[i][j]
+            newfunctionals[i][N*GroupNumber]+=functionals[i][j]
+            newfunctionals[i][N*GroupNumber+2]=functionals[i][j]
         
 for i in range(0,size[0]):
     for j in range(0,N**2):
-        newfunctionals[i][N*j]=newfunctionals[i][N*j]+functionals[i][j]       
+        newfunctionals[i][N*j]+=functionals[i][j]       
         
     
     
