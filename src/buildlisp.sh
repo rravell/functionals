@@ -2,8 +2,8 @@
 
 DIRECTORY="$HOME/git/functionals/src"
 DIRTYSCRIPT="dirtyscript.lisp"
-VECTORFILE="IneffFunctionals4433Lisp.txt"
-OUTPUTFILE="operatedvectors.txt"
+VECTORFILE="IneffFunctionals4433LispCG.txt"
+OUTPUTFILE="operatedvectorsCG.txt"
 
 cat << EOF > $DIRECTORY/$DIRTYSCRIPT
 #!/usr/bin/sbcl --script
